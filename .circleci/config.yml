@@ -16,15 +16,24 @@ jobs:
           aws-region: AWS_REGION
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           from: ./bucket
-          to: 's3://templo-de-la-santa-cruz-queretaro-landing-page'
+          to: 's3://santacruzqueretaro.com'
       - aws-s3/copy:
           arguments: '--dryrun'
+          from: ./bucket
+          to: 's3://santacruzqueretaro.com'
+      - aws-s3/sync:
+          arguments: |
+            --acl public-read \
+            --cache-control "max-age=86400"
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-region: AWS_REGION
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
           from: ./bucket
           to: 's3://www.santacruzqueretaro.com'
       - aws-s3/copy:
           arguments: '--dryrun'
           from: ./bucket
-          to: 's3://santacruzqueretaro.com'
+          to: 's3://www.santacruzqueretaro.com'
 workflows:
   s3-deploy:
     jobs:

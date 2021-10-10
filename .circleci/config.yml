@@ -20,8 +20,12 @@ jobs:
       - aws-s3/copy:
           arguments: '--dryrun'
           from: ./bucket
-          to: 's3://templo-de-la-santa-cruz-queretaro-landing-page'
+          to: 's3://www.santacruzqueretaro.com'
+      - aws-s3/copy:
+          arguments: '--dryrun'
+          from: ./bucket
+          to: 's3://santacruzqueretaro.com'
 workflows:
-  s3-example:
+  s3-deploy:
     jobs:
       - build
